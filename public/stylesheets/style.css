@@ -10,3 +10,24 @@ h1 {
 a {
   color: #00B7FF;
 }
+
+.tweet {
+	display: block;
+	padding: 1em;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+}
+
+.tweet img {
+	float: left;
+	margin-right: 1em;
+}
+
+.tweet a {
+	color: #55ACEE;
+	text-decoration: none;
+}
+
+.tweet p {
+	color: #4a4a4a;
+}

@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var tweets = require('./routes/tweets');
 
 var app = express();
 var http = require('http').createServer(app);
@@ -28,7 +27,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/tweets', tweets);
 
 
 var client = new Twitter({
@@ -39,12 +37,13 @@ var client = new Twitter({
 });
 
 io.on('connection', function(socket){
-	client.stream('statuses/filter', {track: 'superbowl, superbowl50, superbowlXXXXX'}, function(stream){
+	client.stream('statuses/filter', {track: 'SB50, superbowl, superbowl50, superbowlXXXXX, superbowlcommercials2016, panthers, broncos'}, function(stream){
 		stream.on('data', function(tweet) {
 			socket.emit('tweet', tweet);
 		});
 		stream.on('error', function(error){
-			socket.emit('tweet', tweet);
+			if (!error)
+				socket.emit('tweet', tweet);
 		});
 	});
 
