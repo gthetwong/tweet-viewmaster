@@ -28,7 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
-
 var client = new Twitter({
 	consumer_key: process.env.CONSUMER_KEY,
 	consumer_secret: process.env.CONSUMER_SECRET,
@@ -36,18 +35,28 @@ var client = new Twitter({
 	access_token_secret: process.env.ACCESS_SECRET
 });
 
-io.on('connection', function(socket){
-	client.stream('statuses/filter', {track: 'SB50, superbowl, superbowl50, superbowlXXXXX, superbowlcommercials2016, panthers, broncos'}, function(stream){
-		stream.on('data', function(tweet) {
-			socket.emit('tweet', tweet);
-		});
-		stream.on('error', function(error){
-			if (!error)
-				socket.emit('tweet', tweet);
-		});
-	});
-
-});
+//io.on('connection', function(socket){
+//	client.get('trends/place', {id: 23424977}, function(error, data, response){
+//		//rate limiting is 15 calls for 15 minutes!
+//		if(error)
+//			socket.emit('error', error);
+//
+//		var trendList = data[0].trends;
+//		var trackList = [];
+//		for(var i=0; i < 10; i++){
+//			trackList.push(trendList[i].name);
+//		}
+//		client.stream('statuses/filter', {track: trackList.toString() }, function(stream){
+//			stream.on('data', function(tweet) {
+//				socket.emit('tweet', tweet);
+//			});
+//			stream.on('error', function(error){
+//				if (!error)
+//					socket.emit('tweet', tweet);
+//			});
+//		});
+//	});
+//});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

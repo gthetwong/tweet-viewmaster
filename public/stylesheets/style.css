@@ -1,14 +1,23 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	height: 100%;
+	width: 100%;
 }
 
 h1 {
 	color: pink;
+	position: absolute;
+	top: 10%;
+	left: 10%;
 }
 
 a {
   color: #00B7FF;
+}
+
+.content {
+	height: 100%;
+	width: 100%;
 }
 
 .tweet {
