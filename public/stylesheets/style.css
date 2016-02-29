@@ -31,3 +31,24 @@ a {
 .tweet p {
 	color: #4a4a4a;
 }
+
+.search {
+	margin-left: 1em;
+	border: 0;
+	border-bottom: 1px solid grey;
+}
+
+.switch {
+	padding: 2em;
+	margin: 1em 0;
+	text-align: center;
+	border: 1px solid #f1f0ee;
+	color: #f1f0ee;
+	background: #C55851;
+	cursor: pointer;
+}
+
+.switch.on {
+	background: #72D572;
+}
+
