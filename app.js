@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 
 var app = express();
-var http = require('http').Server(app);
+var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var Twitter = require('twit');
 //var dotenv = require('dotenv');
@@ -36,6 +36,11 @@ var client = new Twitter({
 	access_token_secret: process.env.ACCESS_SECRET
 });
 
+
+io.configure(function () {
+	io.set("transports", ["xhr-polling"]);
+	io.set("polling duration", 10);
+});
 
 io.on('connection', function(socket){
 
