@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 
 var app = express();
-var http = require('http').createServer(app);
+var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var Twitter = require('twit');
 //var dotenv = require('dotenv');
@@ -106,6 +106,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-http.listen(3000);
+http.listen(5000);
 module.exports = app;
 
