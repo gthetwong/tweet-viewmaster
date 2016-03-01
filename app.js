@@ -9,7 +9,7 @@ var routes = require('./routes/index');
 
 var app = express();
 var http = require('http').createServer(app);
-var io = require('socket.io')(http);
+var io = require('socket.io').listen(http);
 var Twitter = require('twit');
 //var dotenv = require('dotenv');
 //dotenv.load();
@@ -37,12 +37,7 @@ var client = new Twitter({
 });
 
 
-io.configure(function () {
-	io.set("transports", ["xhr-polling"]);
-	io.set("polling duration", 10);
-});
-
-io.on('connection', function(socket){
+io.sockets.on('connection', function(socket){
 
 	socket.on('trends', function(){
 		client.get('trends/place', {id: 23424977}, function(error, data, response) {
@@ -111,6 +106,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-http.listen(5000);
+http.listen(process.env.PORT || 5000);
 module.exports = app;
 
