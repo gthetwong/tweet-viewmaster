@@ -10,7 +10,7 @@ var routes = require('./routes/index');
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-var Twitter = require('twitter');
+var Twitter = require('twit');
 var dotenv = require('dotenv');
 dotenv.load();
 
@@ -32,32 +32,48 @@ app.use('/', routes);
 var client = new Twitter({
 	consumer_key: process.env.CONSUMER_KEY,
 	consumer_secret: process.env.CONSUMER_SECRET,
-	access_token_key: process.env.ACCESS_TOKEN,
+	access_token: process.env.ACCESS_TOKEN,
 	access_token_secret: process.env.ACCESS_SECRET
 });
 
-io.on('connection', function(socket){
-	client.get('trends/place', {id: 23424977}, function(error, data, response){
-		//rate limiting is 15 calls for 15 minutes!
-		if(error)
-			socket.emit('error', error);
 
-		var trendList = data[0].trends;
-		var trackList = [];
-		for(var i=0; i < 10; i++){
-			trackList.push(trendList[i].name);
-		}
-		client.stream('statuses/filter', {track: trackList.toString() }, function(stream){
-			stream.on('data', function(tweet) {
-				socket.emit('tweet', tweet);
-			});
-			stream.on('error', function(error){
-				if (!error)
-					socket.emit('tweet', tweet);
-			});
+io.on('connection', function(socket){
+
+	socket.on('trends', function(){
+		client.get('trends/place', {id: 23424977}, function(error, data, response) {
+			console.log('trends started');
+			if (!error) {
+				var trendList = data[0].trends;
+				var trackList = [];
+				for(var i=0; i < 10; i++){
+					trackList.push(trendList[i].name);
+				}
+				getStream(trackList.toString());
+			}
 		});
 	});
+
+	socket.on('search', function(value) {
+		getStream(value);
+	});
+
+	function getStream(query) {
+		var stream = client.stream('statuses/filter', {track: query});
+		stream.on('tweet', function(tweet){
+			socket.emit('tweet', tweet);
+			console.log(tweet.text);
+		});
+		stream.on('error', function(error){
+			//socket.emit('tweet', tweet);
+			socket.emit('error', error);
+		});
+		socket.on('end', function(){
+			stream.stop();
+		});
+	}
+
 });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,14 +1,42 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	padding: 50px;
+	font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 h1 {
-	color: pink;
+	color: black;
 }
 
 a {
   color: #00B7FF;
+}
+
+form {
+
+}
+
+button {
+	padding: .5em;
+	border-radius: 5px;
+	border: 0px solid #f1f0ee;
+	font-size: 1.25em;
+}
+
+.search {
+	margin-left: 1em;
+}
+
+.trends {
+	display:block;
+	background: #4FC3F7;
+	color: #fff;
+}
+
+input {
+	font-size: 1.5em;
+	margin-left: 1em;
+	border: 0;
+	border-bottom: 1px solid grey;
 }
 
 .tweet {
@@ -30,12 +58,6 @@ a {
 
 .tweet p {
 	color: #4a4a4a;
-}
-
-.search {
-	margin-left: 1em;
-	border: 0;
-	border-bottom: 1px solid grey;
 }
 
 .switch {
