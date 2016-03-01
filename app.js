@@ -70,6 +70,9 @@ io.sockets.on('connection', function(socket){
 		socket.on('end', function(){
 			stream.stop();
 		});
+		socket.on('disconnect', function(){
+			stream.stop();
+		});
 	}
 
 });
