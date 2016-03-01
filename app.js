@@ -11,8 +11,8 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var Twitter = require('twit');
-var dotenv = require('dotenv');
-dotenv.load();
+//var dotenv = require('dotenv');
+//dotenv.load();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
