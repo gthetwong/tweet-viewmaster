@@ -1,11 +1,22 @@
 body {
 	padding: 50px;
 	font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+	color: #fff;
 }
 
-h1 {
-	color: black;
+header {
+	display: none;
+	position: absolute;
+	top: 0;
+	z-index: 1;
 }
+
+.scene {
+	position: absolute;
+	top: 0;
+	z-index: 0;
+}
+
 
 a {
   color: #00B7FF;

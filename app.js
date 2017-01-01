@@ -11,8 +11,8 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io').listen(http);
 var Twitter = require('twit');
-//var dotenv = require('dotenv');
-//dotenv.load();
+var dotenv = require('dotenv');
+dotenv.load();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -110,5 +110,6 @@ app.use(function(err, req, res, next) {
 });
 
 http.listen(process.env.PORT || 3000);
+console.log('listening on port ' + process.env.PORT + ':');
 module.exports = app;
 
