@@ -1,20 +1,24 @@
 doctype html
 html
-	head
-		title= title
-		link(rel='stylesheet', href='/stylesheets/style.css')
-		script(src="https://aframe.io/releases/0.4.0/aframe.js")
-	body
-		header
-			h1 THIS IS YOUR BRAIN ON TWITTER.
-			form
-				label And this is what happens when you think about:
-				input
-				button.search(type="submit") SEARCH
-				button.trends(type="button") Check out trending topics
-			.switch.on I am ON.
-		a-scene.scene
-			a-sky(color="#222")
-			a-sphere(color="red", position="0 2 -10", rotation="0 45 45", scale="2 2 2")
-		script(src="/socket.io/socket.io.js")
-		script(src="/javascripts/site.js")
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src="https://aframe.io/releases/0.4.0/aframe.js")
+  body
+    header
+      h1 THIS IS YOUR BRAIN ON TWITTER.
+      form
+        label And this is what happens when you think about:
+        input
+        button.search(type="submit") SEARCH
+        button.trends(type="button") Check out trending topics
+        .switch.on I am ON.
+    a-scene.scene
+      a-assets
+        img(id="skyTexture", src="/assets/sky.jpg")
+        img(id="groundTexture", src="/assets/ground.jpg")
+      a-sky(src="#skyTexture")
+      //a-plane(rotation="-90 0 0", width="30", height="30", src="#groundTexture")
+      a-sphere(color="red", position="0 2 -10", rotation="0 45 45", scale="2 2 2")
+    script(src="/socket.io/socket.io.js")
+    script(src="/javascripts/site.js")
