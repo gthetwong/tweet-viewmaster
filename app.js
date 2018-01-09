@@ -46,7 +46,8 @@ io.sockets.on('connection', function(socket){
 				var trendList = data[0].trends;
 				var trackList = [];
 				for(var i=0; i < 10; i++){
-					trackList.push(trendList[i].name);
+                    if (trendList[i] && trendList[i].name)
+                        trackList.push(trendList[i].name);
 				}
 				getStream(trackList.toString());
 			}
